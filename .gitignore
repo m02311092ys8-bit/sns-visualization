@@ -1,0 +1,22 @@
+# Python environment and cache
+.venv/
+__pycache__/
+*.py[cod]
+
+# Original and intermediate datasets
+/data/raw/
+/data/processed/
+
+# Node.js dependencies and generated builds
+node_modules/
+dist/
+
+# Local environment settings
+.env
+.env.*
+!.env.example
+
+# Logs and operating system files
+*.log
+.DS_Store
+Thumbs.db

@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SNS情報可視化 | ニューヨーク</title>
+</head>
+
+<body>
+    <header>
+        <span class="tag">SNS VISUALIZATION / 卒業研究</span>
+        <h1>投稿から見る、都市の一日</h1>
+        <p>ニューヨーク周辺の位置情報付きツイートを時間順に表示</p>
+    </header>
+
+    <main>
+        <section class="panel" aria-label="時間操作">
+            <div class="summary">
+                <div>
+                    <span class="label">表示時刻 · CST（UTC−6）</span>
+                    <strong id="clock">2013-01-12 00:30:00</strong>
+                </div>
+                <div>
+                    <span class="label">直近30分間の投稿数（対象地域全体）</span>
+                    <strong id="count">—</strong>
+                </div>
+            </div>
+
+            <fieldset id="controls" disabled>
+                <label for="timeline">表示時刻を変更</label>
+                <input id="timeline" type="range" min="0" max="86399" step="1" value="1800" />
+                <div class="scale">
+                    <span>00:00</span><span>12:00</span><span>23:59</span>
+                </div>
+                <div class="buttons">
+                    <button id="play" type="button">再生</button>
+                    <button id="reset" type="button">先頭へ</button>
+                    <label for="speed">再生速度</label>
+                    <select id="speed">
+                        <option value="60">1秒で1分</option>
+                        <option value="300" selected>1秒で5分</option>
+                        <option value="900">1秒で15分</option>
+                    </select>
+                </div>
+            </fieldset>
+
+            <p id="status" role="status" aria-live="polite">読み込み中…</p>
+        </section>
+
+        <div id="map" aria-label="ニューヨーク周辺の投稿分布"></div>
+
+        <footer>
+            <p>
+                対象：2013年1月12日（CST）／34,260件。
+                CSTはニューヨーク現地時間より1時間遅い時刻です。
+            </p>
+            <p>
+                点は投稿位置を表します。投稿本文や投稿間の拡散経路は含みません。
+            </p>
+            <p>
+                データ：
+                Helwig, Gao, Wang &amp; Ma (2015),
+                <a href="https://doi.org/10.24432/C5RS5J" target="_blank" rel="noopener noreferrer">
+                    Twitter Geospatial Data / UCI
+                </a>
+                ·
+                <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY
+                    4.0</a>
+                ／地域・期間の抽出、UTC変換、GeoJSON化を実施。
+            </p>
+        </footer>
+    </main>
+
+    <script type="module" src="/main.js"></script>
+</body>
+
+</html>
