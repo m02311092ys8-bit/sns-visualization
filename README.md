@@ -1,5 +1,13 @@
 # SNS情報拡散・感情可視化Webアプリ
 
+## 公開アプリ
+
+https://sns-visualization.vercel.app/
+
+## ソースコード
+
+https://github.com/m02311092ys8-bit/sns-visualization
+
 卒業研究と就職活動用ポートフォリオとして開発しているWebアプリです。
 SNS投稿の地理的・時間的な分布、情報拡散のネットワーク、
 YouTubeコメントの感情分析結果を可視化することを目指しています。
@@ -96,7 +104,6 @@ npm.cmd run preview
 - 公開用ビルドとローカルプレビュー
 
 上記は手動で確認済みです。
-データ加工用スクリプトの整理・保存は今後行います。
 
 ## データの出典・ライセンス
 
@@ -110,3 +117,40 @@ https://creativecommons.org/licenses/by/4.0/
 
 本プロジェクトでは地域・期間の抽出、日時変換、
 項目の追加、GeoJSONへの形式変換を行っています。
+
+## データ加工の再現方法
+
+Python 3.14.6、pandas 3.1.1で実行確認済みです。
+以下はプロジェクトのルートフォルダで実行します。
+
+### 初回の環境準備
+
+```powershell
+py -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+```
+
+### 元データの配置
+
+UCIの配布ページからTwitter Geospatial Dataを取得・展開し、
+twitter.csvを次の場所に置きます。
+
+`data/raw/geographic/twitter_geospatial/twitter/twitter.csv`
+
+配布ページ：
+https://archive.ics.uci.edu/dataset/1050/twitter+geospatial+data
+
+### 加工の実行
+
+```powershell
+.\.venv\Scripts\python.exe .\scripts\geographic\prepare_nyc.py
+```
+
+次の2ファイルを生成します。
+
+- data/processed/geographic/nyc_2013-01-12_cst.csv
+- web/public/data/nyc_2013-01-12_cst.geojson
+
+既存のGeoJSONがある場合は生成結果と照合し、
+一致しなければ出力前に停止します。
+元データは変更しません。
