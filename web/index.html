@@ -1,38 +1,30 @@
 <!doctype html>
 <html lang="ja">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>SNS情報可視化 | ニューヨーク</title>
+    <title>震災時の声を地図で見る | 時系列デモ</title>
 </head>
-
 <body>
     <header>
         <span class="tag">SNS VISUALIZATION / 卒業研究</span>
-        <h1>投稿から見る、都市の一日</h1>
-        <p>ニューヨーク周辺の位置情報付きツイートを時間順に表示</p>
+        <h1>震災時の声を、地図で見る</h1>
+        <p>東日本大震災の投稿アーカイブを使った、地理・時系列可視化の試作</p>
+        <p class="simulation-notice"><strong>人工時刻による再生デモ</strong><br>
+            時刻はランダムに設定しています。実際の投稿順序・時間分布・情報の拡散を示すものではありません。</p>
     </header>
-
     <main>
-        <section class="panel" aria-label="時間操作">
+        <section class="panel" aria-label="人工時刻の再生操作">
             <div class="summary">
-                <div>
-                    <span class="label">表示時刻 · CST（UTC−6）</span>
-                    <strong id="clock">2013-01-12 00:30:00</strong>
-                </div>
-                <div>
-                    <span class="label">直近30分間の投稿数（対象地域全体）</span>
-                    <strong id="count">—</strong>
-                </div>
+                <div><span class="label">デモ時刻・JST（UTC＋9）／人工時刻</span>
+                    <strong id="clock">2011-03-11 15:16:00</strong></div>
+                <div><span class="label">開始からの累積表示件数（地図の表示範囲に関係なく全投稿を集計）</span>
+                    <strong id="count">—</strong></div>
             </div>
-
             <fieldset id="controls" disabled>
-                <label for="timeline">表示時刻を変更</label>
+                <label for="timeline">デモ時刻を変更</label>
                 <input id="timeline" type="range" min="0" max="86399" step="1" value="1800" />
-                <div class="scale">
-                    <span>00:00</span><span>12:00</span><span>23:59</span>
-                </div>
+                <div class="scale"><span>3/11 14:46</span><span>3/12 02:46</span><span>3/12 14:45:59</span></div>
                 <div class="buttons">
                     <button id="play" type="button">再生</button>
                     <button id="reset" type="button">先頭へ</button>
@@ -44,35 +36,18 @@
                     </select>
                 </div>
             </fieldset>
-
             <p id="status" role="status" aria-live="polite">読み込み中…</p>
         </section>
-
-        <div id="map" aria-label="ニューヨーク周辺の投稿分布"></div>
-
+        <div id="map" aria-label="東日本大震災の投稿位置を表示する地図"></div>
         <footer>
-            <p>
-                対象：2013年1月12日（CST）／34,260件。
-                CSTはニューヨーク現地時間より1時間遅い時刻です。
-            </p>
-            <p>
-                点は投稿位置を表します。投稿本文や投稿間の拡散経路は含みません。
-            </p>
-            <p>
-                データ：
-                Helwig, Gao, Wang &amp; Ma (2015),
-                <a href="https://doi.org/10.24432/C5RS5J" target="_blank" rel="noopener noreferrer">
-                    Twitter Geospatial Data / UCI
-                </a>
-                ·
-                <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY
-                    4.0</a>
-                ／地域・期間の抽出、UTC変換、GeoJSON化を実施。
-            </p>
+            <p>5,765件の投稿を使用。人工時刻を迎えた点は残り続けます。時刻を戻すと、その時点までの投稿に戻ります。点を選択すると本文と人工時刻を表示します。</p>
+            <p>元アーカイブの対象：2011年3月11日14:46から24時間以内の位置情報付き投稿。個々の実際の投稿時刻は、このファイルには含まれていません。</p>
+            <p>表示する時刻は固定した乱数で生成したものです。投稿位置は配布データの座標を使用しています。</p>
+            <p>背景は現在配信されている地図です。震災当時の地理状況や被害分布を示すものではありません。</p>
+            <p>出典：<a href="https://tweet.mapping.jp/" target="_blank" rel="noopener noreferrer">渡邉英徳研究室「東日本大震災ツイートマッピング」</a> ／
+                <a href="https://github.com/wtnv-lab/tweetMapping" target="_blank" rel="noopener noreferrer">配布元</a></p>
         </footer>
     </main>
-
     <script type="module" src="/main.js"></script>
 </body>
-
 </html>
